@@ -6,9 +6,6 @@ module.exports = {
       width: {
         120: '30rem'
       }
-    },
-    screens: {
-      sm: [{ max: '810px' }]
     }
   },
   plugins: []
