@@ -1,6 +1,6 @@
 function SearchInfo() {
   return (
-    <div className="flex items-center h-16 pl-2 mt-2 border-y border-slate-400 bg-slate-100">
+    <div className="flex items-center w-full h-16 pl-4 mt-2 border-y border-slate-400 bg-slate-100">
       <div>
         <span className="text-slate-600">s</span>
         <span className="text-slate-600">에 대한 검색결과</span>
