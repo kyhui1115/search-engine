@@ -1,6 +1,6 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
-function Pagination() {
+export default function Pagination() {
   return (
     <div className="flex items-center justify-between w-full px-8 h-14 bg-slate-100">
       <MdKeyboardArrowLeft className="w-6 h-6 cursor-pointer hover:text-blue-300" />
@@ -22,5 +22,3 @@ function Pagination() {
     </div>
   );
 }
-
-export default Pagination;

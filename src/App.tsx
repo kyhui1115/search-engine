@@ -1,7 +1,7 @@
 import Header from 'components/header/Header';
 import Main from 'components/main/Main';
 
-function App() {
+export default function App() {
   return (
     <div>
       <Header />
@@ -9,5 +9,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

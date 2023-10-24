@@ -9,7 +9,7 @@ interface resizingBar {
   setWidth: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function ResizingBar({
+export default function ResizingBar({
   isResizing,
   setIsResizing,
   initialX,
@@ -59,5 +59,3 @@ function ResizingBar({
     />
   );
 }
-
-export default ResizingBar;
