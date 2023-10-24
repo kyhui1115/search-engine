@@ -1,18 +1,16 @@
 import SearchItem from './SearchItem';
+import type { item } from './SearchSection';
 
-function SearchList() {
+interface searchList {
+  blogList: item[];
+}
+
+export default function SearchList({ blogList }: searchList) {
   return (
     <div className="flex flex-col overflow-y-scroll">
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-      <div></div>
+      {blogList.map((blog) => (
+        <SearchItem key={blog.bloggername} blog={blog} />
+      ))}
     </div>
   );
 }
-
-export default SearchList;
