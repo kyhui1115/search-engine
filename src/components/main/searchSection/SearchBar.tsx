@@ -1,26 +1,16 @@
-import api from 'api';
-import type { SearchResult } from 'components/main/searchSection/SearchSection';
-import type { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
+import { useState, type Dispatch, type SetStateAction } from 'react';
 import { BiSearch } from 'react-icons/bi';
 
 interface searchBar {
-  setBlogData: Dispatch<SetStateAction<SearchResult>>;
+  setSearch: Dispatch<SetStateAction<string>>;
 }
 
-function SearchBar({ setBlogData }: searchBar) {
+function SearchBar({ setSearch }: searchBar) {
   const [text, setText] = useState('');
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const result = await api.get(
-        `/v1/search/blog.json?query=${text}&display=10&start=1&sort=sim`
-      );
-      setBlogData(result.data);
-    } catch (err) {
-      console.log(err);
-    }
+    setSearch(text);
   };
   return (
     <form
