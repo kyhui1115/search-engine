@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import SearchBar from 'components/header/SearchBar';
+import { useEffect, useRef, useState } from 'react';
+import SearchBar from './SearchBar';
 import SearchList from './SearchList';
 import SearchInfo from './SearchInfo';
 import Pagination from './Pagination';
 import ResizingBar from './ResizingBar';
+import api from 'api';
 
-export interface SearchResult {
+export interface searchResult {
   items: item[];
   total: number;
 }
@@ -20,7 +21,10 @@ export interface item {
 }
 
 export default function SearchSection() {
-  const [blogData, setBlogData] = useState<SearchResult>({
+  const searchListRef = useRef<HTMLDivElement | null>(null);
+  const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [blogData, setBlogData] = useState<searchResult>({
     items: [],
     total: 0
   });
@@ -28,13 +32,35 @@ export default function SearchSection() {
   const [initialX, setInitialX] = useState(0);
   const [width, setWidth] = useState(500);
 
+  const fetchBlogList = async () => {
+    const startPage = currentPage * 10 - 9;
+    console.log(startPage);
+    if (search.length > 0) {
+      try {
+        const result = await api.get(
+          `/v1/search/blog.json?query=${search}&display=10&start=${startPage}&sort=sim`
+        );
+        setBlogData(result.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
+
+  useEffect(() => {
+    void fetchBlogList();
+    if (searchListRef?.current !== null) {
+      searchListRef.current.scrollTop = 0;
+    }
+  }, [search, currentPage, setBlogData]);
+
   return (
     <>
       <div className="flex flex-col items-center" style={{ width }}>
-        <SearchBar setBlogData={setBlogData} />
+        <SearchBar setSearch={setSearch} />
         <SearchInfo total={blogData.total} />
-        <SearchList blogList={blogData.items} />
-        <Pagination />
+        <SearchList blogList={blogData.items} searchListRef={searchListRef} />
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </div>
       <ResizingBar
         isResizing={isResizing}
