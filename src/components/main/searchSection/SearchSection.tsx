@@ -34,7 +34,6 @@ export default function SearchSection() {
 
   const fetchBlogList = async () => {
     const startPage = currentPage * 10 - 9;
-    console.log(startPage);
     if (search.length > 0) {
       try {
         const result = await api.get(
