@@ -9,7 +9,7 @@ interface searchList {
 export default function SearchList({ blogList, searchListRef }: searchList) {
   return (
     <div
-      className={`flex flex-col h-158 ${
+      className={`flex flex-col h-full ${
         blogList.length === 0 ? '' : 'overflow-y-scroll'
       }`}
       ref={searchListRef}
