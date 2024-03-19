@@ -19,9 +19,7 @@ export default function SearchList({ blogList, searchListRef }: searchList) {
           검색어를 입력해 주세요
         </span>
       ) : (
-        blogList.map((blog) => (
-          <SearchItem key={blog.bloggername} blog={blog} />
-        ))
+        blogList.map((blog, idx) => <SearchItem key={idx} blog={blog} />)
       )}
     </div>
   );
