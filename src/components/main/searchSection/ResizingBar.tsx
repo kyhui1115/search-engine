@@ -31,7 +31,7 @@ export default function ResizingBar({
     if (isResizing) {
       const newWidth = width + e.clientX - initialX;
       setInitialX(e.clientX);
-      if (newWidth >= 430 && newWidth <= 800) {
+      if (newWidth >= 480 && newWidth <= 800) {
         setWidth(newWidth);
       }
     }
