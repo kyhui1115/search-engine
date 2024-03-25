@@ -1,17 +1,37 @@
 import addCoomasToPostDate from 'utils/addCoomasToPostDate';
 import type { item } from './SearchSection';
+import { type Dispatch, type SetStateAction } from 'react';
 
 interface searchItem {
   blog: item;
+  selectBlog: string[];
+  setSelectBlog: Dispatch<SetStateAction<string[]>>;
 }
 
-export default function SearchItem({ blog }: searchItem) {
+export default function SearchItem({
+  blog,
+  selectBlog,
+  setSelectBlog
+}: searchItem) {
   const date = addCoomasToPostDate(blog.postdate);
+  const blogClickHandler = () => {
+    const MAX_OPEN_BLOG = 2;
+    if (selectBlog[0] === '') {
+      setSelectBlog([blog.link]);
+      return;
+    }
+
+    if (selectBlog.length < MAX_OPEN_BLOG) {
+      setSelectBlog((prev) => [...prev, blog.link]);
+    }
+  };
+
   return (
     <div className="px-2 pt-4 pb-10 border-b border-slate-300">
-      <p
-        className="font-bold truncate text-slate-700"
+      <button
+        className="font-bold truncate text-slate-700 hover:text-blue-500"
         dangerouslySetInnerHTML={{ __html: blog.title }}
+        onClick={blogClickHandler}
       />
       <p
         className="my-4 text-sm line-clamp-3 text-slate-600"

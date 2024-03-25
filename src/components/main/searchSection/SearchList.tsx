@@ -1,12 +1,20 @@
+import { type SetStateAction, type Dispatch, type RefObject } from 'react';
 import SearchItem from './SearchItem';
 import type { item } from './SearchSection';
 
 interface searchList {
   blogList: item[];
-  searchListRef: React.RefObject<HTMLDivElement>;
+  searchListRef: RefObject<HTMLDivElement>;
+  selectBlog: string[];
+  setSelectBlog: Dispatch<SetStateAction<string[]>>;
 }
 
-export default function SearchList({ blogList, searchListRef }: searchList) {
+export default function SearchList({
+  blogList,
+  searchListRef,
+  selectBlog,
+  setSelectBlog
+}: searchList) {
   return (
     <div
       className={`flex flex-col h-full ${
@@ -19,7 +27,14 @@ export default function SearchList({ blogList, searchListRef }: searchList) {
           검색어를 입력해 주세요
         </span>
       ) : (
-        blogList.map((blog, idx) => <SearchItem key={idx} blog={blog} />)
+        blogList.map((blog, idx) => (
+          <SearchItem
+            key={idx}
+            blog={blog}
+            selectBlog={selectBlog}
+            setSelectBlog={setSelectBlog}
+          />
+        ))
       )}
     </div>
   );

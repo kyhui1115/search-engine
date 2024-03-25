@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import {
+  type Dispatch,
+  type SetStateAction,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import SearchBar from './SearchBar';
 import SearchList from './SearchList';
 import SearchInfo from './SearchInfo';
@@ -20,7 +26,15 @@ export interface item {
   link: string;
 }
 
-export default function SearchSection() {
+interface searchSection {
+  selectBlog: string[];
+  setSelectBlog: Dispatch<SetStateAction<string[]>>;
+}
+
+export default function SearchSection({
+  selectBlog,
+  setSelectBlog
+}: searchSection) {
   const searchListRef = useRef<HTMLDivElement | null>(null);
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -48,17 +62,25 @@ export default function SearchSection() {
 
   useEffect(() => {
     void fetchBlogList();
+  }, [search, setBlogData]);
+
+  useEffect(() => {
     if (searchListRef?.current !== null) {
       searchListRef.current.scrollTop = 0;
     }
-  }, [search, currentPage, setBlogData]);
+  }, [currentPage]);
 
   return (
     <>
       <div className="flex flex-col items-center" style={{ width }}>
         <SearchBar setSearch={setSearch} />
         <SearchInfo total={blogData.total} />
-        <SearchList blogList={blogData.items} searchListRef={searchListRef} />
+        <SearchList
+          blogList={blogData.items}
+          searchListRef={searchListRef}
+          selectBlog={selectBlog}
+          setSelectBlog={setSelectBlog}
+        />
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </div>
       <ResizingBar
