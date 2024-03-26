@@ -14,15 +14,22 @@ export default function SearchItem({
   setSelectBlog
 }: searchItem) {
   const date = addCoomasToPostDate(blog.postdate);
+
   const blogClickHandler = () => {
     const MAX_OPEN_BLOG = 2;
+    const mBlogLInk = `${blog.link.slice(0, 8)}m.${blog.link.slice(8)}`;
+
+    if (selectBlog.includes(mBlogLInk)) {
+      return;
+    }
+
     if (selectBlog[0] === '') {
-      setSelectBlog([blog.link]);
+      setSelectBlog([mBlogLInk]);
       return;
     }
 
     if (selectBlog.length < MAX_OPEN_BLOG) {
-      setSelectBlog((prev) => [...prev, blog.link]);
+      setSelectBlog((prev) => [...prev, mBlogLInk]);
     }
   };
 
