@@ -9,7 +9,6 @@ import SearchBar from './SearchBar';
 import SearchList from './SearchList';
 import SearchInfo from './SearchInfo';
 import Pagination from './Pagination';
-import ResizingBar from './ResizingBar';
 import api from 'api';
 
 export interface searchResult {
@@ -42,9 +41,6 @@ export default function SearchSection({
     items: [],
     total: 0
   });
-  const [isResizing, setIsResizing] = useState(false);
-  const [initialX, setInitialX] = useState(0);
-  const [width, setWidth] = useState(500);
 
   const fetchBlogList = async () => {
     const startPage = currentPage * 10 - 9;
@@ -62,7 +58,7 @@ export default function SearchSection({
 
   useEffect(() => {
     void fetchBlogList();
-  }, [search, setBlogData]);
+  }, [search, currentPage, setBlogData]);
 
   useEffect(() => {
     if (searchListRef?.current !== null) {
@@ -71,26 +67,16 @@ export default function SearchSection({
   }, [currentPage]);
 
   return (
-    <>
-      <div className="flex flex-col items-center" style={{ width }}>
-        <SearchBar setSearch={setSearch} />
-        <SearchInfo total={blogData.total} />
-        <SearchList
-          blogList={blogData.items}
-          searchListRef={searchListRef}
-          selectBlog={selectBlog}
-          setSelectBlog={setSelectBlog}
-        />
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      </div>
-      <ResizingBar
-        isResizing={isResizing}
-        setIsResizing={setIsResizing}
-        initialX={initialX}
-        setInitialX={setInitialX}
-        width={width}
-        setWidth={setWidth}
+    <div className="flex flex-col items-center h-full border-r w-120 border-slate-400">
+      <SearchBar setSearch={setSearch} />
+      <SearchInfo total={blogData.total} />
+      <SearchList
+        blogList={blogData.items}
+        searchListRef={searchListRef}
+        selectBlog={selectBlog}
+        setSelectBlog={setSelectBlog}
       />
-    </>
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+    </div>
   );
 }
