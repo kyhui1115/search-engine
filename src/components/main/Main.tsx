@@ -7,7 +7,7 @@ export default function Main() {
   return (
     <div className="flex h-screen pt-20">
       <SearchSection selectBlog={selectBlog} setSelectBlog={setSelectBlog} />
-      <BlogSection selectBlog={selectBlog} />
+      <BlogSection selectBlog={selectBlog} setSelectBlog={setSelectBlog} />
     </div>
   );
 }
