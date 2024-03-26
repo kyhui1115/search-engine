@@ -16,18 +16,6 @@ export default function SearchInfo({ total }: searchInfo) {
           {totalNumber}건
         </span>
       </div>
-      <div className="ml-auto">
-        <input
-          type="button"
-          value="정확도"
-          className="text-sm cursor-pointer text-slate-600"
-        />
-        <input
-          type="button"
-          value="최신순"
-          className="mx-4 text-sm cursor-pointer text-slate-600"
-        />
-      </div>
     </div>
   );
 }
