@@ -42,8 +42,6 @@ export default function SearchSection({
     total: 0
   });
 
-  console.log(blogData);
-
   const fetchBlogList = async () => {
     const startPage = currentPage * 10 - 9;
     if (search.length > 0) {
@@ -52,6 +50,7 @@ export default function SearchSection({
           `/v1/search/blog.json?query=${search}&display=10&start=${startPage}&sort=sim`
         );
         setBlogData(result.data);
+        console.log(result);
       } catch (err) {
         console.error(err);
       }
