@@ -50,6 +50,7 @@ export default function SearchSection({
           `/v1/search/blog.json?query=${search}&display=10&start=${startPage}&sort=sim`
         );
         setBlogData(result.data);
+        console.log(result);
       } catch (err) {
         console.error(err);
       }
