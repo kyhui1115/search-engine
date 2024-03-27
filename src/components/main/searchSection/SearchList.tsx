@@ -15,6 +15,7 @@ export default function SearchList({
   selectBlog,
   setSelectBlog
 }: searchList) {
+  console.log(blogList);
   return (
     <div
       className={`flex flex-col h-full ${
