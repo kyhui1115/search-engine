@@ -40,14 +40,16 @@ export default function SearchItem({
   };
 
   return (
-    <div className="px-2 pt-4 pb-10 border-b border-slate-300">
-      <button
-        className="font-bold truncate text-slate-700 hover:text-blue-500"
+    <button
+      className="px-2 pt-4 pb-10 border-b border-slate-300 hover:border-blue-500 hover:border-2"
+      onClick={blogClickHandler}
+    >
+      <p
+        className="font-bold text-left truncate text-slate-700"
         dangerouslySetInnerHTML={{ __html: blog.title }}
-        onClick={blogClickHandler}
       />
       <p
-        className="my-4 text-sm line-clamp-3 text-slate-600"
+        className="my-4 text-sm text-left line-clamp-3 text-slate-600"
         dangerouslySetInnerHTML={{ __html: blog.description }}
       />
       <div className="flex items-center text-sm">
@@ -55,6 +57,6 @@ export default function SearchItem({
         <span className="h-3 mx-2 border border-slate-400" />
         <span className="text-gray-400">{date}</span>
       </div>
-    </div>
+    </button>
   );
 }
