@@ -19,6 +19,12 @@ export default function SearchItem({
     const MAX_OPEN_BLOG = 2;
     const mBlogLInk = `${blog.link.slice(0, 8)}m.${blog.link.slice(8)}`;
 
+    if (selectBlog.length === MAX_OPEN_BLOG) {
+      window.alert(
+        '닫기(X) 버튼을 통해 2개의 블로그 중 하나를 닫은 후\n새로운 블로그를 열어주세요'
+      );
+    }
+
     if (selectBlog.includes(mBlogLInk)) {
       return;
     }
